@@ -1,0 +1,186 @@
+.skin-original,
+div {
+    --main-color: white;
+    /*主字体颜色*/
+    --sub-color: #dadada;
+    /*副字体颜色*/
+    --main-titlecolor: #111;
+    /*标题字体颜色*/
+    --main-theme: #235282;
+    /*主题颜色*/
+    --head-bg: #1A8FE1;
+    /*头部颜色*/
+    --main-line: #ccc;
+    /*条颜色*/
+    --main-border: #aaa;
+    /*边框色*/
+    --popup-shadow: rgba(0, 0, 0, 0.2);
+    /*shadow*/
+    --chart-bg: #f7f7f7;
+    /*点巡检统计chart背景*/
+    --start-collect: #c5a80d;
+    /*收藏颜色*/
+    --deep-blue: #05325F;
+    --light-blue: #87CEEB;
+    --font-blue: #428BCA;
+    --weight-color: #5C5A59;
+    --light-green: rgb(34, 212, 34);
+    --card-background: rgba(51, 66, 92, 0.4);
+    --tree-active: #00000020;
+    --green-active: #73e87c;
+    --borer-bottom: #50ae9d;
+    --light-border-bottom: #00e8be;
+    --active-text: #58dcc4;
+    --menu-active: #48959c;
+    --err: red;
+    --warn: #ecec4c;
+    --safe: #4de24d;
+    --submit-color: rgba(54, 80, 103, .9);
+    --submit-color-active: #409EFF;
+    --bac-active: #419ca5;
+    --nav-active-bar: #ffd04b;
+    --nav-bac-bar: rgba(33, 50, 66, 0.45);
+    --nav-hover: rgb(52, 87, 97);
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #4acea9, rgb(70, 96, 144), #53c3a1);
+}
+
+.el-scrollbar__wrap {
+    overflow-x: hidden;
+}
+
+.el-loading-mask {
+    background: rgba(25, 65, 79, .7);
+}
+
+.el-popover {
+    background: rgb(63,105,119,.8);
+    color: var(--main-color);
+}
+//--------------------------------------------------------------table 
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background: var(--tree-active);
+}
+
+.el-table .cell {
+    text-align: center;
+    color: var(--main-color);
+    ;
+}
+
+.el-table th,
+.el-table tr {
+    background-color: transparent;
+}
+
+.el-table,
+.el-table__expanded-cell {
+    background-color: transparent;
+}
+
+.el-table--border,
+.el-table--group {
+    border: none;
+}
+
+.el-table::before {
+    display: none;
+}
+
+.el-table__row:nth-last-child(1) td {
+    border-bottom: none;
+}
+
+.el-table__row td:nth-last-child(1) {
+    border-right: none;
+}
+
+.el-table--border::after,
+.el-table--group::after {
+    display: none;
+}
+
+tr th:nth-last-child(1) {
+    border-right: none;
+}
+
+.el-table__fixed-right::before,
+.el-table__fixed::before {
+    display: none;
+}
+
+.el-table--border th:nth-last-child(2) {
+    border-right: none;
+}
+
+td,
+tr,
+th,
+table {
+    border-color: gray!important;
+    // border-style: dashed;
+}
+
+th {
+    border-bottom-color: #85b1c3 !important;
+}
+
+.el-table td,
+.el-table th.is-leaf {
+    border-bottom-color: gray;
+}
+
+.hover-row>td {
+    background-color: var(--tree-active) !important;
+}
+
+.el-table__fixed-right-patch {
+    background: rgb(50 84 94);
+}
+
+//--------------------------------------------------------------table 
+
+.el-input__inner{
+    background: transparent;
+    color: inherit;
+}
+.el-upload__tip{
+    color: inherit;
+}
+.el-upload-dragger{
+    background-color: inherit;
+}
+.el-upload-dragger .el-upload__text{
+    color: inherit;
+}
+.el-form-item__label{
+    color: inherit;
+}
+.el-checkbox,.el-radio{
+    color: inherit;
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus,.el-select .el-input__inner:focus {
+    border-color: #8fc6ff;
+    outline: 0;
+}
+.el-upload-list__item-name,.el-upload-list__item-name{
+    color: var(--main-color);
+}
+.el-upload-list__item-name [class^=el-icon]{
+    color: var(--main-color);
+}
+.el-upload-list__item:hover{
+    background-color: var(--nav-hover);
+}
+.el-upload-list__item .el-icon-close{
+    color: var(--main-color);
+}
+.el-radio {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.el-input.is-disabled .el-input__inner{
+    background-color: inherit;
+}

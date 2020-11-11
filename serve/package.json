@@ -1,0 +1,40 @@
+{
+  "name": "node-serve",
+  "version": "1.0.0",
+  "description": "https服务器",
+  "main": "nodeServe.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "charenc": "^0.0.2",
+    "compression": "^1.7.4",
+    "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
+    "crypt": "^0.0.2",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "is-buffer": "^1.1.6",
+    "is-wsl": "^1.1.0",
+    "md5": "^2.2.1",
+    "multiparty": "^4.2.2",
+    "open": "^6.3.0",
+    "ws": "^7.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serve": "node nodeServe.js",
+    "pkgmac": "pkg . -t node8-macos-x64 -o app",
+    "pkgwin": "pkg . -t node8-win-x64 -o app",
+    "pkg": "pkg . -t node10-win-x64 -o app"
+  },
+  "bin": "./nodeServe.js",
+  "pkg": {
+    "assets": "dist/**/*"
+  },
+  "author": "lzd",
+  "license": "ISC",
+  "keywords": [
+    "love2113308953"
+  ]
+}

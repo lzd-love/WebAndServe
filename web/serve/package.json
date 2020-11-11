@@ -1,0 +1,27 @@
+{
+  "name": "node-serve",
+  "version": "1.0.0",
+  "description": "https服务器",
+  "main": "nodeServe.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "charenc": "^0.0.2",
+    "crypt": "^0.0.2",
+    "is-buffer": "^1.1.6",
+    "md5": "^2.2.1",
+    "is-wsl": "^1.1.0",
+    "open": "^6.3.0",
+    "ws": "^7.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serve": "node nodeServe.js"
+  },
+  "author": "lzd",
+  "license": "ISC",
+  "keywords": [
+    "love2113308953"
+  ]
+}

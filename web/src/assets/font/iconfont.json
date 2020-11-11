@@ -1,0 +1,58 @@
+{
+  "id": "2057595",
+  "name": "EPM",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "881249",
+      "name": "运行状态",
+      "font_class": "ecs-running",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "7533289",
+      "name": "日志",
+      "font_class": "rizhi",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "1115042",
+      "name": "记录",
+      "font_class": "jilu",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "8084191",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "8213088",
+      "name": "安装调试",
+      "font_class": "azts",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "4159797",
+      "name": "更新",
+      "font_class": "update",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "9512694",
+      "name": "返回",
+      "font_class": "withdraw-fill",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    }
+  ]
+}
