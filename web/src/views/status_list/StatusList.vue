@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-09-17 09:18:27
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-11 11:13:03
+ * @LastEditTime: 2020-11-13 16:24:33
  * @Description: content description
 -->
 <template>
@@ -22,9 +22,18 @@
               <span>设备编号：</span>
               <span>{{ item.deviceId }}</span>
             </div>
-            <div>
+            <div style="display: flex">
               <span>设备名称：</span>
               <span>{{ item.deviceName }}</span>
+              <div
+                class="message-btn"
+                @click="
+                  changeNameDialog = true;
+                  changeNameId = item.deviceId;
+                "
+              >
+                改名
+              </div>
             </div>
           </div>
           <div class="list-item-consignment">
@@ -39,7 +48,7 @@
                 <span>{{ item.curSimState }}</span>
               </div>
               <div>
-                <span>授时信息：</span>
+                <span>时间：</span>
                 <span>{{ item.curTime }}</span>
               </div>
             </div>
@@ -52,7 +61,7 @@
                 <span>{{ getSwitchStatus(item.signalSwitch) }}</span>
               </div>
               <div>
-                <span>AGC功率衰减值：</span>
+                <span>AGC：</span>
                 <span>{{ item.agc }}</span>
               </div>
               <div>
@@ -173,6 +182,28 @@
         </el-badge>
       </el-popover>
     </div>
+    <el-dialog
+      :modal="false"
+      title="请输入名称"
+      :visible.sync="changeNameDialog"
+      width="480px"
+      top="35vh"
+      style="text-align: left"
+    >
+      <span>新名称：<input v-model="newName" /></span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="changeNameDialog = false" size="mini"
+          >取 消</el-button
+        >
+        <el-button
+          type="primary"
+          @click="updateDeviceName"
+          :disabled="!newName"
+          size="mini"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -180,6 +211,7 @@
 import mixins from "@plugins/mixins.js";
 // import MyBlob from "@plugins/Blob.js";
 import websocketApi from "@api/WsApi.js";
+import Api from "@api/HttpApi_jq.js";
 export default {
   mixins: [mixins],
   name: "StatusList",
@@ -188,23 +220,26 @@ export default {
       import("../equipment_settings/EquipmentSettings.vue"),
     EquipmentStatus: () => import("../equipment_status/EquipmentStatus.vue"),
     ProbeRecord: () => import("../probe_record/ProbeRecord.vue"),
-    LogRecord: () => import("../log_record/LogRecord.vue")
+    LogRecord: () => import("../log_record/LogRecord.vue"),
   },
   data() {
     return {
+      newName: "",
+      changeNameId: "",
+      changeNameDialog: false,
       loading: true,
       selectOptions: [
         {
           value: "/upload/LinuxApp",
-          label: "LinuxApp"
-        }
+          label: "LinuxApp",
+        },
       ],
       selectVal: "",
       pageMap: new Map([
         [1, "EquipmentSettings"],
         [2, "ProbeRecord"],
         [3, "EquipmentStatus"],
-        [4, "LogRecord"]
+        [4, "LogRecord"],
       ]),
       frameShow: true,
       ss: this.$moment().format("YYYY-MM-DD HH:mm:ss"),
@@ -226,10 +261,10 @@ export default {
           appInfo: [
             {
               appName: "测试",
-              appVersion: "v1.1"
-            }
-          ]
-        }
+              appVersion: "v1.1",
+            },
+          ],
+        },
       ],
       offlineData: [
         {
@@ -238,9 +273,9 @@ export default {
           deviceName: "设备2",
           curLong: "12.874306",
           curLat: "28.232434",
-          curHeight: "80.65"
-        }
-      ]
+          curHeight: "80.65",
+        },
+      ],
     };
   },
   computed: {
@@ -251,10 +286,10 @@ export default {
       return this.pageMap.get(this.pageType);
     },
     deviceIdToFalse() {
-      return this.offlineData.find(item => {
+      return this.offlineData.find((item) => {
         return item.deviceId == this.deviceId;
       });
-    }
+    },
   },
   watch: {
     deviceIdToFalse(val) {
@@ -264,9 +299,33 @@ export default {
     },
     pageTage(val) {
       console.log(val);
-    }
+    },
   },
   methods: {
+    updateDeviceName() {
+      Api.updateDeviceName({
+        deviceId: this.changeNameId,
+        deviceName: this.newName,
+      }).then((res) => {
+        console.log(res);
+        if (res.code == 200) {
+          this.changeNameDialog = false;
+          this.changeNameId = "";
+          this.newName = "";
+          this.$notify({
+            title: "成功",
+            message: res.msg,
+            type: "success",
+          });
+        } else {
+          this.$notify({
+            title: "警告",
+            message: res.msg,
+            type: "warning",
+          });
+        }
+      });
+    },
     getSwitchStatus(val) {
       return val == 1 ? "开启" : "关闭";
     },
@@ -275,13 +334,13 @@ export default {
         this.$notify({
           title: "警告",
           message: "上传失败",
-          type: "warning"
+          type: "warning",
         });
       } else if (data.status === "success") {
         this.$notify({
           title: "成功",
           message: "上传成功",
-          type: "success"
+          type: "success",
         });
       }
     },
@@ -306,19 +365,19 @@ export default {
       this.$confirm("确定退出登录吗", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
         .then(() => {
           window.sessionStorage.removeItem("token");
           this.$router.push({
-            path: "/"
+            path: "/",
           });
         })
         .catch(() => {});
     },
     websocketStart() {
       let that = this;
-      websocketApi.devicestatus(function(res) {
+      websocketApi.devicestatus(function (res) {
         that.loading = false;
         const data = JSON.parse(res.data);
         if (data.onLine) {
@@ -344,7 +403,7 @@ export default {
         ":" +
         str.slice(12);
       return getVal;
-    }
+    },
   },
   created() {
     this.websocketStart();
@@ -366,7 +425,7 @@ export default {
       clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
     }
     websocketApi.close();
-  }
+  },
 };
 </script>
 
@@ -594,6 +653,17 @@ export default {
   color: gray;
   &:hover {
     color: gray;
+  }
+}
+.message-btn {
+  margin-left: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0 10px;
+  background: var(--submit-color);
+  overflow: hidden;
+  &:hover {
+    background: var(--bac-active);
   }
 }
 </style>

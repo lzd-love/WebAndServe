@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-09-18 11:33:29
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-10 09:32:58
+ * @LastEditTime: 2020-11-16 08:53:44
  * @Description: content description
 -->
 <template>
@@ -25,8 +25,8 @@
       </el-table-column>
       <el-table-column
         sortable
-        prop="fileSize"
-        label="文件大小(k)"
+        prop="fileName"
+        label="文件名"
       ></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -108,8 +108,13 @@ export default {
               dom.classList.add("disabled");
               setTimeout(() => {
                 dom.classList.remove("disabled");
+                this.$notify({
+                  type: "warning",
+                  message: "文件下载失败",
+                });
               }, 60000);
               Api.surveyDownLoad(obj).then(res => {
+                console.log(res)
                 let blob = new MyBlob([res.data], {
                   type: "text/plain;"
                 });
@@ -125,7 +130,7 @@ export default {
                 } else {
                   this.$notify({
                     type: "warning",
-                    message: row.fileName + "文件损坏!"
+                    message: row.fileName + (res.data.msg||"文件损坏!")
                   });
                 }
                 dom.classList.remove("disabled");

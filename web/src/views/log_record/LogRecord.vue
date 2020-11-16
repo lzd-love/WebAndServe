@@ -2,12 +2,12 @@
  * @Author: lzd
  * @Date: 2020-09-18 11:33:29
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-10 09:31:45
+ * @LastEditTime: 2020-11-16 08:53:35
  * @Description: content description
 -->
 <template>
   <div class="log-record" v-loading="loading">
-    <el-table :data="tableData" border height="100%" style="height: 100%;">
+    <el-table :data="tableData" border height="100%" style="height: 100%">
       <el-table-column
         prop="time"
         label="时间"
@@ -44,7 +44,7 @@ export default {
   name: "LogRecord",
   components: {},
   props: {
-    HardWareSN: {}
+    HardWareSN: {},
   },
   data() {
     return {
@@ -53,14 +53,14 @@ export default {
         {
           time: "2020-09-17 16:00:00",
           fileName: "log20201025000000",
-          fileSize: "5120"
+          fileSize: "5120",
         },
         {
           time: "2020-09-17 15:00:00",
           fileName: "log20201025000001",
-          fileSize: "5120"
-        }
-      ]
+          fileSize: "5120",
+        },
+      ],
     };
   },
   computed: {
@@ -72,12 +72,12 @@ export default {
         arr.push({ text: item, value: item });
       }
       return arr.reverse();
-    }
+    },
   },
   watch: {},
   methods: {
     listGet() {
-      Api.historyLog({ deviceId: this.HardWareSN }).then(res => {
+      Api.historyLog({ deviceId: this.HardWareSN }).then((res) => {
         this.loading = false;
         this.$set(this, "tableData", res.data);
       });
@@ -90,7 +90,7 @@ export default {
     fileDown(row) {
       let obj = {
         deviceId: this.HardWareSN,
-        fileName: row.fileName
+        fileName: row.fileName,
       };
       let dom = event.target;
       !(Array.from(dom.classList).indexOf("disabled") > -1) &&
@@ -98,21 +98,25 @@ export default {
           this.$confirm("确定要下载该文件吗", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
-            type: "info"
+            type: "info",
           })
             .then(() => {
               this.$notify({
                 type: "info",
-                message: row.fileName + "文件下载中!"
+                message: row.fileName + "文件下载中!",
               });
               dom.classList.add("disabled");
               setTimeout(() => {
                 dom.classList.remove("disabled");
+                this.$notify({
+                  type: "warning",
+                  message: "文件下载失败",
+                });
               }, 60000);
-              Api.historyLogDownLoad(obj).then(res => {
-                // console.log(res);
+              Api.historyLogDownLoad(obj).then((res) => {
+                console.log(res);
                 let blob = new MyBlob([res.data], {
-                  type: "text/plain;"
+                  type: "text/plain;",
                 });
                 let filename = res.headers["content-disposition"]
                   ? res.headers["content-disposition"].split("=")[1]
@@ -120,13 +124,13 @@ export default {
                 if (filename) {
                   this.$notify({
                     type: "success",
-                    message: filename + "文件下载成功!"
+                    message: filename + "文件下载成功!",
                   });
                   blob.downloadByATag(filename);
                 } else {
                   this.$notify({
                     type: "warning",
-                    message: row.fileName + "文件损坏!"
+                    message: row.fileName + (res.data.msg || "文件损坏!"),
                   });
                 }
                 dom.classList.remove("disabled");
@@ -134,7 +138,7 @@ export default {
             })
             .catch(() => {});
         })();
-    }
+    },
   },
   created() {
     this.listGet();
@@ -148,7 +152,7 @@ export default {
     if (this.timer) {
       clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
     }
-  }
+  },
 };
 </script>
 

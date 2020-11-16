@@ -56,10 +56,24 @@ body {
 }
 
 .el-popover {
-    background: rgb(63,105,119,.8);
+    background: rgb(63, 105, 119, .8);
     color: var(--main-color);
 }
-//--------------------------------------------------------------table 
+
+.el-dialog {
+    background: rgb(64, 109, 124, .7);
+    color: var(--main-color);
+}
+
+.el-dialog__title {
+    color: var(--main-color);
+}
+
+.el-dialog__body {
+    color: var(--main-color);
+}
+
+//--------------------------------------------------------------table
 .el-table--enable-row-hover .el-table__body tr:hover>td {
     background: var(--tree-active);
 }
@@ -119,7 +133,7 @@ td,
 tr,
 th,
 table {
-    border-color: gray!important;
+    border-color: gray !important;
     // border-style: dashed;
 }
 
@@ -142,45 +156,61 @@ th {
 
 //--------------------------------------------------------------table 
 
-.el-input__inner{
+.el-input__inner {
     background: transparent;
     color: inherit;
 }
-.el-upload__tip{
+
+.el-upload__tip {
     color: inherit;
 }
-.el-upload-dragger{
+
+.el-upload-dragger {
     background-color: inherit;
 }
-.el-upload-dragger .el-upload__text{
+
+.el-upload-dragger .el-upload__text {
     color: inherit;
 }
-.el-form-item__label{
+
+.el-form-item__label {
     color: inherit;
 }
-.el-checkbox,.el-radio{
+
+.el-checkbox,
+.el-radio {
     color: inherit;
 }
-.el-input.is-active .el-input__inner, .el-input__inner:focus,.el-select .el-input__inner:focus {
+
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus,
+.el-select .el-input__inner:focus {
     border-color: #8fc6ff;
     outline: 0;
 }
-.el-upload-list__item-name,.el-upload-list__item-name{
+
+.el-upload-list__item-name,
+.el-upload-list__item-name {
     color: var(--main-color);
 }
-.el-upload-list__item-name [class^=el-icon]{
+
+.el-upload-list__item-name [class^=el-icon] {
     color: var(--main-color);
 }
-.el-upload-list__item:hover{
+
+.el-upload-list__item:hover {
     background-color: var(--nav-hover);
 }
-.el-upload-list__item .el-icon-close{
+
+.el-upload-list__item .el-icon-close {
     color: var(--main-color);
 }
+
 .el-radio {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.el-input.is-disabled .el-input__inner{
+
+.el-input.is-disabled .el-input__inner {
     background-color: inherit;
 }

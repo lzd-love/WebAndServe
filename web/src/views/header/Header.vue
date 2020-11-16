@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-10-19 09:43:44
  * @LastEditors: lzd
- * @LastEditTime: 2020-10-19 15:20:05
+ * @LastEditTime: 2020-11-13 17:03:09
  * @Description: content description
 -->
 <template>
@@ -17,7 +17,7 @@
         <div class="btn">
           <span class="btn-icon el-icon-user"></span>
           <el-dropdown @command="dropdownCommand">
-            <span class="btn-name">admin</span>
+            <span class="btn-name">{{userName?userName:'admin'}}</span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click="logout" command="logout"
                 >退出登录</el-dropdown-item
@@ -39,7 +39,11 @@ export default {
       selectCommandMap: new Map([["logout", "logout"]])
     };
   },
-  computed: {},
+  computed: {
+    userName(){
+      return window.sessionStorage.getItem("userName")
+    }
+  },
   watch: {},
   methods: {
     dropdownCommand(command) {

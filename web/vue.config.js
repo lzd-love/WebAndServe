@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-09-04 08:54:44
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-11 10:39:27
+ * @LastEditTime: 2020-11-13 13:44:38
  * @Description: content description
  */
 const path = require("path"); // 引入path模块
@@ -75,14 +75,14 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://10.129.11.1:8888", //目标地址
+        target: "http://47.112.136.15:8888", //目标地址
         ws: false, //// 是否启用websockets
         secure: false, //是否使用https加密 如果后台是非安全证书，关闭加密
         changeOrigin: true, //开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
         pathRewrite: { "^/api": "" } //这里重写路径
       },
       "/ws": {
-        target: "ws://10.129.11.1:8090", //目标地址
+        target: "ws://47.112.136.15:8090", //目标地址
         ws: true, //// 是否启用websockets
         changeOrigin: true, //开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
         pathRewrite: { "^/ws": "" } //这里重写路径

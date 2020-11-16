@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-09-11 09:04:21
  * @LastEditors: lzd
- * @LastEditTime: 2020-10-30 14:40:09
+ * @LastEditTime: 2020-11-13 14:18:46
  * @Description: content description
 -->
 <template>
@@ -15,9 +15,7 @@
           <el-radio :label="1">开启</el-radio>
         </el-radio-group>
       </div>
-      <div class="message-btn" @click="signalControl">
-        设置
-      </div>
+      <div class="message-btn" @click="signalControl">设置</div>
     </div>
     <div class="message-row">
       <div class="message-row-label">防御模式：</div>
@@ -27,9 +25,7 @@
           <el-radio :label="1">全自动</el-radio>
         </el-radio-group>
       </div>
-      <div class="message-btn" @click="workModeControl">
-        设置
-      </div>
+      <div class="message-btn" @click="workModeControl">设置</div>
     </div>
     <div class="message-row">
       <div class="message-row-label">数据存储设置：</div>
@@ -39,9 +35,7 @@
           <el-radio :label="1">开始存储</el-radio>
         </el-radio-group>
       </div>
-      <div class="message-btn" @click="surveyDataSave">
-        设置
-      </div>
+      <div class="message-btn" @click="surveyDataSave">设置</div>
     </div>
     <!-- <div class="message-row">
       <div class="message-row-label">agc功率衰减：</div>
@@ -62,7 +56,7 @@ export default {
   name: "EquipmentSettings",
   components: {},
   props: {
-    HardWareSN: {}
+    HardWareSN: {},
   },
   data() {
     return {
@@ -71,16 +65,16 @@ export default {
       formData: {
         detectDataflag: 0,
         signalSwitch: 0,
-        workMode: 0
+        workMode: 0,
       },
-      loading: true
+      loading: true,
     };
   },
   computed: {},
   watch: {},
   methods: {
     setDataGet() {
-      Api.settings({ deviceId: this.HardWareSN }).then(res => {
+      Api.settings({ deviceId: this.HardWareSN }).then((res) => {
         this.loading = false;
         // this.formData = res.data;
         this.$set(this, "formData", res.data);
@@ -91,38 +85,46 @@ export default {
       Api.signalControl({
         deviceId: this.HardWareSN,
         signal: 0,
-        isOpen: this.formData.signalSwitch
-      }).then(res => {
-        this.notify(res);
-        this.setDataGet();
+        isOpen: this.formData.signalSwitch,
+      }).then((res) => {
+        setTimeout(() => {
+          this.notify(res);
+          this.setDataGet();
+        }, 2000);
       });
     },
     workModeControl() {
       this.loading = true;
       Api.workModeControl({
         deviceId: this.HardWareSN,
-        workMode: this.formData.workMode
-      }).then(res => {
-        this.notify(res);
-        this.setDataGet();
+        workMode: this.formData.workMode,
+      }).then((res) => {
+        setTimeout(() => {
+          this.notify(res);
+          this.setDataGet();
+        }, 2000);
       });
     },
     surveyDataSave() {
       this.loading = true;
       Api.surveyDataSave({
         deviceId: this.HardWareSN,
-        flag: this.formData.detectDataflag
-      }).then(res => {
-        this.notify(res);
-        this.setDataGet();
+        flag: this.formData.detectDataflag,
+      }).then((res) => {
+        setTimeout(() => {
+          this.notify(res);
+          this.setDataGet();
+        }, 2000);
       });
     },
     powerControl() {
       this.loading = true;
       Api.powerControl({ deviceId: this.HardWareSN, power: this.power }).then(
-        res => {
-          this.notify(res);
-          this.setDataGet();
+        (res) => {
+          setTimeout(() => {
+            this.notify(res);
+            this.setDataGet();
+          }, 2000);
         }
       );
     },
@@ -131,16 +133,16 @@ export default {
         this.$notify({
           title: "成功",
           message: res.msg,
-          type: "success"
+          type: "success",
         });
       } else {
         this.$notify({
           title: "警告",
           message: res.msg,
-          type: "warning"
+          type: "warning",
         });
       }
-    }
+    },
   },
   created() {
     this.setDataGet();
@@ -154,7 +156,7 @@ export default {
     if (this.timer) {
       clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
     }
-  }
+  },
 };
 </script>
 

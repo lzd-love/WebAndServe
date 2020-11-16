@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-09-08 11:14:21
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-10 09:09:30
+ * @LastEditTime: 2020-11-13 17:02:44
  * @Description: content description
 -->
 <template>
@@ -56,6 +56,7 @@ export default {
             message: "登陆成功",
             type: "success"
           });
+          window.sessionStorage.setItem("userName", res.data.userName);
           window.sessionStorage.setItem("token", res.rank);
           window.sessionStorage.setItem("uid", res.data.userId);
           this.$router.push({

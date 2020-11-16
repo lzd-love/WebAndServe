@@ -2,7 +2,7 @@
  * @Author: lzd
  * @Date: 2020-10-26 14:44:48
  * @LastEditors: lzd
- * @LastEditTime: 2020-11-02 14:14:26
+ * @LastEditTime: 2020-11-13 14:39:29
  * @Description: content description
  */
 import axios from "axios";
@@ -273,6 +273,24 @@ class Api {
   versionControl(data) {
     return new Promise((resolve, reject) => {
       axios.post(this.baseUrl + "/versionControl", data || {}).then(
+        res => {
+          resolve(res.data);
+        },
+        err => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  /**
+   * @description: 更新设备名
+   * @param {deviceId,deviceName}
+   * @return {*}
+   */
+  updateDeviceName(data) {
+    return new Promise((resolve, reject) => {
+      axios.post(this.baseUrl + "/updateDeviceName", data || {}).then(
         res => {
           resolve(res.data);
         },
