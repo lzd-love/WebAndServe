@@ -1,8 +1,8 @@
 <!--
  * @Author: lzd
  * @Date: 2020-09-11 09:04:21
- * @LastEditors: lzd
- * @LastEditTime: 2020-11-13 14:18:46
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-11-25 14:05:50
  * @Description: content description
 -->
 <template>
@@ -90,7 +90,7 @@ export default {
         setTimeout(() => {
           this.notify(res);
           this.setDataGet();
-        }, 2000);
+        }, 3000);
       });
     },
     workModeControl() {
@@ -102,7 +102,7 @@ export default {
         setTimeout(() => {
           this.notify(res);
           this.setDataGet();
-        }, 2000);
+        }, 3000);
       });
     },
     surveyDataSave() {
@@ -114,7 +114,7 @@ export default {
         setTimeout(() => {
           this.notify(res);
           this.setDataGet();
-        }, 2000);
+        }, 3000);
       });
     },
     powerControl() {
@@ -124,7 +124,7 @@ export default {
           setTimeout(() => {
             this.notify(res);
             this.setDataGet();
-          }, 2000);
+          }, 3000);
         }
       );
     },

@@ -73,7 +73,7 @@ app.use(
   "/api",
   createProxyMiddleware({
     // 代理跨域目标接口
-    target: "http://127.0.0.1:8888",//10.129.11.1:8888
+    target: "http://47.112.136.15:8888",//10.129.11.1:8888
     changeOrigin: true,
     // 修改响应头信息，实现跨域并允许带cookie
     pathRewrite: { "^/api": "/" }, //这里重写路径
@@ -88,7 +88,7 @@ app.use(
   "/ws",
   createProxyMiddleware({
     // 代理跨域目标接口
-    target: "ws://127.0.0.1:8090",//10.129.11.1:8090
+    target: "ws://47.112.136.15:8090",//10.129.11.1:8090
     changeOrigin: true,
     // 修改响应头信息，实现跨域并允许带cookie
     ws: true,
@@ -138,8 +138,8 @@ var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 //可以分别设置http、https的访问端口号
 
-var PORT = 8902;
-var SSLPORT = 8903;
+var PORT = 4000;
+var SSLPORT = 4200;
 //创建http服务器
 
 httpServer.listen(PORT, function () {
@@ -150,4 +150,4 @@ httpsServer.listen(SSLPORT, function () {
   console.log("HTTPS Server is running on: https://localhost:%s", SSLPORT);
 }); //可以根据请求判断是http还是https
 
-cp.exec("start chrome http://127.0.0.1:8902/");
+cp.exec("start chrome http://127.0.0.1:4000/");

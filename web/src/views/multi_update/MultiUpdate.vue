@@ -1,8 +1,8 @@
 <!--
  * @Author: lzd
  * @Date: 2020-10-19 16:28:27
- * @LastEditors: lzd
- * @LastEditTime: 2020-11-13 17:04:39
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-11-25 14:36:56
  * @Description: content description
 -->
 <template>
@@ -68,6 +68,7 @@
           :before-upload="beforeUpload"
           style="width: 400px"
         >
+        <!-- :http-request="httpRequest" -->
           <el-button slot="trigger" size="small" type="primary"
             >选取文件</el-button
           >
@@ -85,11 +86,13 @@
         </el-upload>
       </el-form-item>
     </el-form>
+    <div class="progress-box"></div>
   </div>
 </template>
 
 <script>
 import Api from "@api/HttpApi_jq.js";
+import MyFileReader from "@plugins/FileReader.js";
 export default {
   name: "MultiUpdate",
   components: {},
@@ -176,6 +179,15 @@ export default {
     },
   },
   methods: {
+    httpRequest(data) {
+      // console.log(data);
+      let file = data.file;
+      let reader = new MyFileReader();
+      reader.readFile(file);
+      reader.loadend().then(() => {
+        console.log(reader.fileReader.result)
+      });
+    },
     beforeUpload(data) {
       console.log(data);
       // this.$set(this,'fileLength',data.name?data.name.length:0)
@@ -207,17 +219,21 @@ export default {
       if (re.test(temp)) return false;
       return true;
     },
-    getChineseLength(str){
+    getChineseLength(str) {
       let charLength = 0;
-      for(let i = 0;i<=str.length;i++){
-        this.isChinese(str[i])?(charLength+=1):""
+      for (let i = 0; i <= str.length; i++) {
+        this.isChinese(str[i]) ? (charLength += 1) : "";
       }
-      return charLength
+      return charLength;
     },
     upgrade(data) {
       // console.log(data)
-      debugger;
-      this.$set(this, "fileLength", data.name ? data.name.length + this.getChineseLength(data.name) : 0);
+      // debugger;
+      this.$set(
+        this,
+        "fileLength",
+        data.name ? data.name.length + this.getChineseLength(data.name) : 0
+      );
       if (data.status === "fail") {
         this.$notify({
           message: "更新失败",
@@ -228,12 +244,12 @@ export default {
           message: this.list.join(",") + "更新中",
           type: "info",
         });
-        setTimeout(()=>{
+        setTimeout(() => {
           this.$notify({
             message: this.list.join(",") + "更新完成",
             type: "success",
-          })
-        },3000)
+          });
+        }, 3000);
         this.$set(this, "fileLength", 0);
         // 重置选择，刷新列表
         this.checkAll = false;
@@ -268,6 +284,7 @@ export default {
     }
   }
 }
+
 .list-content {
 }
 /deep/ .el-input-group__prepend {

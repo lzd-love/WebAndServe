@@ -45,7 +45,7 @@ class MyBlob {
     this.a.click();
     setTimeout(() => {
       window.URL.revokeObjectURL(this.objectUrl);
-    }, 5000);
+    }, 10000);
   }
 }
 

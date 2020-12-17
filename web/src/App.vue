@@ -1,14 +1,15 @@
 <!--
  * @Author: lzd
  * @Date: 2020-09-07 14:15:07
- * @LastEditors: lzd
- * @LastEditTime: 2020-11-10 09:38:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-11-26 11:05:02
  * @Description: content description
 -->
 <template>
   <div id="app" class="skin-original">
     <Header v-if="!isLogin" />
     <Navabar v-if="!isLogin" />
+    <UpdateProgress v-if="!isLogin" />
     <transition name="el-fade-in-linear">
       <keep-alive include="StatusList">
         <router-view class="bottom-view"></router-view>
@@ -18,12 +19,12 @@
 </template>
 
 <script>
-// import Header from "./views/header/Header";
 export default {
   name: "app",
   components: {
     Header: () => import("./views/header/Header"),
-    Navabar: () => import("./views/navabar/Navabar")
+    Navabar: () => import("./views/navabar/Navabar"),
+    UpdateProgress: () => import("./views/update_progress/UpdateProgress")
   },
   computed: {
     isLogin() {
